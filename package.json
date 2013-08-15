@@ -6,6 +6,10 @@
   "scripts": {
     "test": "node test/test.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karlwestin/gumbo-parser.git"
+  },
   "keywords": ["html", "parser"],
   "devDependencies": {
     "node-gyp": "0.10.x"
