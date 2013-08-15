@@ -1,0 +1,15 @@
+{
+  "name": "gumbo-parser",
+  "version": "0.0.1",
+  "author": "Karl Westin <karl.westin@gmail.com>",
+  "description": "Parsing HTML using google gumbp parser",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "keywords": ["html", "parser"],
+  "devDependencies": {
+    "node-gyp": "0.10.x"
+  },
+  "license": "MIT",
+  "engines": { "node": ">=0.10" }
+}
