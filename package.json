@@ -4,8 +4,7 @@
   "author": "Karl Westin <karl.westin@gmail.com>",
   "description": "Parsing HTML using google gumbp parser",
   "scripts": {
-    "test": "node test/test.js",
-    "preinstall" : "git submodule update --init"
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
