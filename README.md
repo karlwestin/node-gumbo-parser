@@ -1,5 +1,14 @@
 # Gumbo Parser
 
+## npm install is currently broken :(
+do like this:
+1. clone repo
+2. cd into deps/gumbo-parser
+3. ./configure && make install
+4. link to local package
+
+Sorry, I hope to fix this in the next day
+
 Using [google's gumbo parser](https://github.com/google/gumbo-parser) to parse HTML in node.
 
 ```
