@@ -48,6 +48,11 @@
             'src/util.c',
             'src/vector.c',
        ],
+       'conditions': [
+           ['OS=="linux"', {
+             'cflags': ['-std=gnu99']
+           }, {}]
+       ],
     },
 
 

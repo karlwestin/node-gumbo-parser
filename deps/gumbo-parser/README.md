@@ -1,3 +1,7 @@
+## Note about this fork
+This is for maintaining a .gyp file to build the node-gumbo-parser module
+The node package itself has moved here [https://github.com/karlwestin/node-gumbo-parser](https://github.com/karlwestin/node-gumbo-parser)
+
 Gumbo - A pure-C HTML5 parser.
 ============
 
