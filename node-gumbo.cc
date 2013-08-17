@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <cstring>
 #include <v8.h>
 #include <node.h>
 #include "deps/gumbo-parser/src/gumbo.h"

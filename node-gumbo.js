@@ -1,3 +1,3 @@
-var bind = require("./build/release/binding");
+var bind = require("./build/Release/binding");
 module.exports = bind;
 

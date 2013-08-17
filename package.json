@@ -1,14 +1,14 @@
 {
   "name": "gumbo-parser",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Karl Westin <karl.westin@gmail.com>",
-  "description": "Parsing HTML using google gumbp parser",
+  "description": "Parsing HTML using google gumbo parser",
   "scripts": {
     "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/karlwestin/gumbo-parser.git"
+    "url": "https://github.com/karlwestin/node-gumbo-parser.git"
   },
   "main": "./node-gumbo",
   "keywords": ["html", "parser"],

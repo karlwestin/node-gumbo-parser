@@ -1,7 +1,6 @@
 # Gumbo Parser
 
-## npm install is currently only works on mac
-(I expect to fix linux on the wknd)
+(npm install not fixed on windows yet)
 
 Using [google's gumbo parser](https://github.com/google/gumbo-parser) to parse HTML in node.
 
