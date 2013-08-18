@@ -145,8 +145,8 @@ Handle<Value> Method(const Arguments& args) {
     return scope.Close(ret);
 } 
 
-void init(Handle<Object> exports, Handle<Object> module) {
-    NODE_SET_METHOD(module, "exports", Method);
+void init(Handle<Object> exports) {
+    NODE_SET_METHOD(exports, "gumbo", Method);
 }
 
 NODE_MODULE(binding, init);

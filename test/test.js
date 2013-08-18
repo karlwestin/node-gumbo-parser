@@ -28,4 +28,13 @@ function tryParse(err, text) {
   console.log("...done!");
 
 }
-fs.readFile(__dirname + "/test.html", { encoding: "utf-8" }, tryParse);
+
+// API changed between 0.8 and 0.10
+var args = [__dirname + "/test.html"];
+if(fs.readFile.length == 2) {
+  args.push("utf-8", tryParse);
+} else {
+  args.push({ encoding: "utf-8" }, tryParse);
+}
+
+fs.readFile.apply(fs, args);
