@@ -58,14 +58,6 @@ Attribute
   nodeType: (number) 2
 ```
 
-### Nodetypes:
-Currently i only output the values i get from gumbo itself
-
-**Element (3)** nodeType, tagName, children, attributes  
-**TextNode (1)** nodeType, textContent  
-**Document (0)** nodeType  
-**Comment (8)** nodeType, textContent, nodeValue  
-
 ### Build and test:
 ```
 node-gyp configure
