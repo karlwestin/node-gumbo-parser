@@ -1,7 +1,8 @@
 var bind = require("./build/Release/binding");
 
-module.exports = function Gumbo() {
-  var ret = bind.gumbo.apply(this, arguments);
+module.exports = function Gumbo(text, config) {
+  config = config || {};
+  var ret = bind.gumbo.call(this, text, config);
 
   // extract the root tag from document resp
   try {

@@ -14,6 +14,16 @@ var tree = gumbo(htmlstring);
 There's only one method:
 gumbo(htmlstring) 
 
+You can also pass in the options
+gumbo(htmlstring, {
+  // The tab-stop size, for computing positions in source code that uses tabs.
+  // default: 8
+  tabStop: 8,
+  // Whether or not to stop parsing when the first error is encountered.
+  // default: false
+  stopOnFirstError: true
+});
+
 returns:
 
 {
@@ -64,3 +74,12 @@ node-gyp configure
 node-gyp build
 npm test
 ```
+
+
+## Changes
+
+**0.1.2 (not yet released)** Taking the (optional) options argument
+
+**0.1.1** Fix build on node 0.8
+
+**0.1.0** Passing { document: document, root: root } instead of only root

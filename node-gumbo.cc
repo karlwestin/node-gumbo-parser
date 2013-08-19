@@ -121,17 +121,42 @@ Local<Object> recursive_search(GumboNode* node) {
 Handle<Value> Method(const Arguments& args) {
     HandleScope scope;
 
-    Local<Value> str = args[0];
+    /*
+     * getting options
+     */
+    Local<Object> config = Local<Object>::Cast(args[1]);
+    Local<Value> s_o_f = config->Get(String::New("stopOnFirstError"));
+    bool stop_on_first_error = false;
+    if (s_o_f->IsBoolean()) {
+      stop_on_first_error = s_o_f->ToBoolean()->Value();
+    }
 
+    Local<Value> t_s = config->Get(String::New("tabStop"));
+    int tab_stop = 8;
+    if (t_s->IsNumber()) {
+      tab_stop = t_s->ToInteger()->Value();
+    }
+
+    /*
+     * getting text 
+     */
+    Local<Value> str = args[0];
     if(!str->IsString() ) {
-      return v8::ThrowException(v8::String::New("Gumbo argument needs to be a string"));
+      return v8::ThrowException(v8::String::New("The first argument needs to be a string"));
     }
 
     v8::String::AsciiValue string(str);
     char *str2 = (char *) malloc(string.length() + 1);
     strcpy(str2, *string);
 
-    GumboOutput* output = gumbo_parse(str2);
+    /*
+     * creating options
+     */
+    GumboOptions options = kGumboDefaultOptions;
+    options.tab_stop = tab_stop;
+    options.stop_on_first_error = stop_on_first_error;
+
+    GumboOutput* output = gumbo_parse_with_options(&options, str2, strlen(str2));
 
     // root points to html tag
     // document points to document
@@ -141,7 +166,7 @@ Handle<Value> Method(const Arguments& args) {
 
     // TODO: Parse errors
 
-    gumbo_destroy_output(&kGumboDefaultOptions, output);
+    gumbo_destroy_output(&options, output);
     return scope.Close(ret);
 } 
 
