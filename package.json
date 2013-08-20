@@ -16,5 +16,5 @@
     "node-gyp": "0.10.x"
   },
   "license": "MIT",
-  "engines": { "node": ">=0.10" }
+  "engines": { "node": ">=0.8" }
 }
