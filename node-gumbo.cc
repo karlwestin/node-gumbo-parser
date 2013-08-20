@@ -82,8 +82,10 @@ Local<Object> read_document(GumboNode* node) {
   obj->Set(String::NewSymbol("nodeType"), Integer::New(9));
   obj->Set(String::NewSymbol("nodeName"), String::New("#document"));
   obj->Set(String::NewSymbol("hasDoctype"), Boolean::New(doc->has_doctype));
-  // TODO: DOCUMENT THIS ONE -> figure out what are the possible values!
-  obj->Set(String::NewSymbol("doctype"), String::New(doc->name));
+
+  obj->Set(String::NewSymbol("name"), String::New(doc->name));
+  obj->Set(String::NewSymbol("publicIdentifier"), String::New(doc->public_identifier));
+  obj->Set(String::NewSymbol("systemIdentifier"), String::New(doc->system_identifier));
 
   GumboVector* children = &doc->children;
   Local<Array> childNodes = Array::New(children->length);

@@ -1,12 +1,9 @@
 var gumbo = require("../node-gumbo");
-var fs = require("fs");
+var reader = require("./reader");
 var assert = require("assert");
 
-function tryParse(err, text) {
-  if(err) {
-    throw err;
-  }
-  console.log("Running tests...");
+reader("/test.html", function(text) {
+  console.log("Running: normal");
 
   var output = gumbo(text);
   var root = output.root;
@@ -26,15 +23,29 @@ function tryParse(err, text) {
   console.log("Parses attributes");
 
   console.log("...done!");
+});
 
-}
+reader("/parse-error.html", function(text) {
+  console.log("Running: stopOnFirstError");
 
-// API changed between 0.8 and 0.10
-var args = [__dirname + "/test.html"];
-if(fs.readFile.length == 2) {
-  args.push("utf-8", tryParse);
-} else {
-  args.push({ encoding: "utf-8" }, tryParse);
-}
+  var output = gumbo(text, { stopOnFirstError: true });
+  assert.equal(output.root, undefined);
+  console.log("stopped on error when option is passed");
 
-fs.readFile.apply(fs, args);
+  var output2 = gumbo(text);
+  assert.notEqual(output2.root, undefined);
+  console.log("didn't stop on error by default");
+
+  console.log("...done!");
+});
+
+reader("/legacy-doctype.html", function(text) {
+  console.log("Running: legacy doctypes");
+  var output = gumbo(text).document; 
+
+  assert(output.systemIdentifier, "system parameter is parsed");
+  assert(output.publicIdentifier, "public parameter is parsed");
+
+  console.log("added systemIdentifier and publicIdentifier");
+  console.log("...done!");
+});

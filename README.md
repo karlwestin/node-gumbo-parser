@@ -54,7 +54,9 @@ Document:
   nodeType (number) 9
   children (array)
   hasDoctype true/false
-  name: (string) Currently figuring this out
+  name: (string)            -> see below
+  publicIdentifier (string)       "
+  systemIdentifier (string)       "
 
 CommentNode
   nodeName (string) #comment
@@ -68,6 +70,17 @@ Attribute
   nodeType: (number) 2
 ```
 
+### About html doctypes
+
+An html document will always have the `document.name` "html".
+If the document has anything else in the type, for example this html4 doctype:
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+the first part within quotation marks will end up in the `document.publicIdentifier`,
+and the second part will be in `document.systemIdentifier`. You can read more about this here: [http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-doctype](http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-doctype).
+
 ### Build and test:
 ```
 node-gyp configure
@@ -75,10 +88,10 @@ node-gyp build
 npm test
 ```
 
-
 ## Changes
 
-**0.1.2 (not yet released)** Taking the (optional) options argument
+**0.1.2** Taking the (optional) options argument
+          providing publicIdentifier and systemIdentifer for the doctype
 
 **0.1.1** Fix build on node 0.8
 
