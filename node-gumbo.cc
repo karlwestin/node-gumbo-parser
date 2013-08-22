@@ -147,7 +147,7 @@ Handle<Value> Method(const Arguments& args) {
       return v8::ThrowException(v8::String::New("The first argument needs to be a string"));
     }
 
-    v8::String::AsciiValue string(str);
+    v8::String::Utf8Value string(str);
     char *str2 = (char *) malloc(string.length() + 1);
     strcpy(str2, *string);
 
