@@ -148,8 +148,6 @@ Handle<Value> Method(const Arguments& args) {
     }
 
     v8::String::Utf8Value string(str);
-    char *str2 = (char *) malloc(string.length() + 1);
-    strcpy(str2, *string);
 
     /*
      * creating options
@@ -158,7 +156,7 @@ Handle<Value> Method(const Arguments& args) {
     options.tab_stop = tab_stop;
     options.stop_on_first_error = stop_on_first_error;
 
-    GumboOutput* output = gumbo_parse_with_options(&options, str2, strlen(str2));
+    GumboOutput* output = gumbo_parse_with_options(&options, *string, string.length());
 
     // root points to html tag
     // document points to document
