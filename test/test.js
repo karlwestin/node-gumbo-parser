@@ -49,3 +49,12 @@ reader("/legacy-doctype.html", function(text) {
   console.log("added systemIdentifier and publicIdentifier");
   console.log("...done!");
 });
+
+reader("/unicode.html", function(text) {
+  console.log("Running: unicode");
+  var output = gumbo(text);
+  assert.equal(output.root.attributes[0].value, "Héɭｌｏ, ɰòｒｌᏧ");
+
+  console.log("Handles non-ascii characters");
+  console.log("...done!");
+});
