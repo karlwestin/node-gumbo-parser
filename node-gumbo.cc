@@ -147,9 +147,7 @@ Handle<Value> Method(const Arguments& args) {
       return v8::ThrowException(v8::String::New("The first argument needs to be a string"));
     }
 
-    v8::String::AsciiValue string(str);
-    char *str2 = (char *) malloc(string.length() + 1);
-    strcpy(str2, *string);
+    v8::String::Utf8Value string(str);
 
     /*
      * creating options
@@ -158,7 +156,7 @@ Handle<Value> Method(const Arguments& args) {
     options.tab_stop = tab_stop;
     options.stop_on_first_error = stop_on_first_error;
 
-    GumboOutput* output = gumbo_parse_with_options(&options, str2, strlen(str2));
+    GumboOutput* output = gumbo_parse_with_options(&options, *string, string.length());
 
     // root points to html tag
     // document points to document
