@@ -90,6 +90,8 @@ npm test
 
 ## Changes
 
+**0.1.4** Temporary workaround for the latest changes in node 0.11, thanks [Daniel](https://github.com/TheHydroImpulse)
+
 **0.1.3** Fixes utf-8 bug, thanks [Yonatan](https://github.com/yonatan)
 
 **0.1.2** Taking the (optional) options argument
