@@ -171,7 +171,8 @@ Handle<Value> Method(const Arguments& args) {
 } 
 
 void init(Handle<Object> exports) {
-    NODE_SET_METHOD(exports, "gumbo", Method);
+    exports->Set(String::NewSymbol("gumbo"),
+      FunctionTemplate::New(Method)->GetFunction());
 }
 
 NODE_MODULE(binding, init);
