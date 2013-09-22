@@ -75,7 +75,7 @@ typedef enum {
 
 // This is a struct containing state necessary to build up a tag token,
 // character by character.
-typedef struct _GumboTagState {
+typedef struct GumboInternalTagState {
   // A buffer to accumulate characters for various GumboStringPiece fields.
   GumboStringBuffer _buffer;
 
@@ -121,7 +121,7 @@ typedef struct _GumboTagState {
 
 // This is the main tokenizer state struct, containing all state used by in
 // tokenizing the input stream.
-typedef struct _GumboTokenizerState {
+typedef struct GumboInternalTokenizerState {
   // The current lexer state.  Starts in GUMBO_LEX_DATA.
   GumboTokenizerEnum _state;
 
@@ -442,7 +442,7 @@ static void finish_token(GumboParser* parser, GumboToken* token) {
   reset_token_start_point(tokenizer);
   token->original_text.length =
       tokenizer->_token_start - token->original_text.data;
-  if (token->original_text.data[token->original_text.length - 1] == '\r') {
+  if (token->original_text.length > 0 && token->original_text.data[token->original_text.length - 1] == '\r') {
     // The UTF8 iterator will ignore carriage returns in the input stream, which
     // means that the next token may start one past a \r character.  The pointer
     // arithmetic above results in that \r being appended to the original text

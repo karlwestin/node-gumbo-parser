@@ -28,6 +28,10 @@ Non-goals:
 * Support for encodings other than UTF-8.  For the most part, client code
   can convert the input stream to UTF-8 text using another library before
   processing.
+* Security.  Gumbo was initially designed for a product that worked with
+  trusted input files only.  We're working to harden this and make sure that it
+  behaves as expected even on malicious input, but for now, Gumbo should only be
+  run on trusted input or within a sandbox.
 * C89 support.  Most major compilers support C99 by now; the major exception
   (Microsoft Visual Studio) should be able to compile this in C++ mode with
   relatively few changes.  (Bug reports welcome.)
@@ -85,6 +89,15 @@ Debian and Fedora users can install libgtest with:
 
     $ apt-get install libgtest-dev  # Debian/Ubuntu
     $ yum install gtest-devel       # CentOS/Fedora
+
+Note for Ubuntu users: libgtest-dev package only install source files.
+You have to make libraries yourself using cmake:
+
+    $ sudo apt-get install cmake
+    $ cd /usr/src/gtest
+    $ sudo cmake CMakeLists.txt
+    $ sudo make
+    $ sudo cp *.a /usr/lib
 
 The configure script will detect the presence of the library and use that
 instead.
@@ -145,24 +158,32 @@ an existing API (personally, I prefer BeautifulSoup) and write your program
 in terms of those.  The raw CTypes bindings should be considered building
 blocks for higher-level libraries and rarely referenced directly.
 
-Ruby usage
-============
-Nicolas Martyanoff has written Ruby bindings as a separate project.  Check them out at:
+External Bindings
+=================
 
-https://github.com/galdor/ruby-gumbo
+The following language bindings are maintained by various contributors in
+other repositories:
 
-Contributing
-===========
-Bug reports are very much welcome.  Please use GitHub's issue-tracking feature, as it makes it easier to keep track of bugs and makes it possible for other project watchers to view the existing issues.
-
-Patches and pull requests are also welcome, but before accepting patches, I need you to sign the Google Contributor License Agreement:
-
-https://developers.google.com/open-source/cla/individual
-https://developers.google.com/open-source/cla/corporate
-
-(Electronic signatures are fine or individual contributors.)
-
-If you're unwilling to do this, it would be most helpful if you could file bug reports that include detailed prose about where in the code the error is and how to fix it, but leave out exact source code.
+* Ruby:
+  * [ruby-gumbo] by Nicolas Martyanoff
+  * [nokogumbo] by Sam Ruby
+* Node.js: [node-gumbo-parser] by Karl Westin
+* D: [gumbo-d] by Christopher Bertels
+* Lua: [lua-gumbo] by Craig Barnes
+* Objective-C:
+  * [ObjectiveGumbo] by Programming Thomas
+  * [OCGumbo] by TracyYih
+* C#: [GumboBindings] by Vladimir Zotov
+* PHP: [GumboPHP] by Paul Preece
+[ruby-gumbo]: https://github.com/galdor/ruby-gumbo
+[nokogumbo]: https://github.com/rubys/nokogumbo
+[node-gumbo-parser]: https://github.com/karlwestin/node-gumbo-parser
+[gumbo-d]: https://github.com/bakkdoor/gumbo-d
+[lua-gumbo]: https://github.com/craigbarnes/lua-gumbo
+[OCGumbo]: https://github.com/tracy-e/OCGumbo
+[ObjectiveGumbo]: https://github.com/programmingthomas/ObjectiveGumbo
+[GumboBindings]: https://github.com/rgripper/GumboBindings
+[GumboPHP]: https://github.com/BipSync/gumbo
 
 [HTML5 parsing algorithm]: http://www.whatwg.org/specs/web-apps/current-work/multipage/#auto-toc-12
 [HTML5 spec]: http://www.whatwg.org/specs/web-apps/current-work/multipage/

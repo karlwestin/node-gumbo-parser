@@ -41,13 +41,13 @@
 extern "C" {
 #endif
 
-struct _GumboError;
-struct _GumboParser;
+struct GumboInternalError;
+struct GumboInternalParser;
 
 // Unicode replacement char.
 extern const int kUtf8ReplacementChar;
 
-typedef struct _Utf8Iterator {
+typedef struct GumboInternalUtf8Iterator {
   // Points at the start of the code point most recently read into 'current'.
   const char* _start;
 
@@ -72,7 +72,7 @@ typedef struct _Utf8Iterator {
 
   // Pointer back to the GumboParser instance, for configuration options and
   // error recording.
-  struct _GumboParser* _parser;
+  struct GumboInternalParser* _parser;
 } Utf8Iterator;
 
 // Returns true if this Unicode code point is in the list of characters
@@ -82,8 +82,8 @@ bool utf8_is_invalid_code_point(int c);
 // Initializes a new Utf8Iterator from the given byte buffer.  The source does
 // not have to be NUL-terminated, but the length must be passed in explicitly.
 void utf8iterator_init(
-    struct _GumboParser* parser, const char* source, size_t source_length,
-    Utf8Iterator* iter);
+    struct GumboInternalParser* parser, const char* source,
+    size_t source_length, Utf8Iterator* iter);
 
 // Advances the current position by one code point.
 void utf8iterator_next(Utf8Iterator* iter);
@@ -119,7 +119,7 @@ void utf8iterator_reset(Utf8Iterator* iter);
 // Sets the position and original text fields of an error to the value at the
 // mark.
 void utf8iterator_fill_error_at_mark(
-    Utf8Iterator* iter, struct _GumboError* error);
+    Utf8Iterator* iter, struct GumboInternalError* error);
 
 #ifdef __cplusplus
 }
