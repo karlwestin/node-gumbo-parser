@@ -81,6 +81,10 @@ If the document has anything else in the type, for example this html4 doctype:
 the first part within quotation marks will end up in the `document.publicIdentifier`,
 and the second part will be in `document.systemIdentifier`. You can read more about this here: [http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-doctype](http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-doctype).
 
+### Untrusted content
+
+If you plan on using gumbo-parser to clean user input, [please read this comment from the gumbo-parsers authors.](https://github.com/google/gumbo-parser/issues/53#issuecomment-24707222)
+
 ### Build and test:
 ```
 node-gyp configure
@@ -89,6 +93,9 @@ npm test
 ```
 
 ## Changes
+
+**0.1.5** Updating the gumbo-parser to the latest version. This includes some security fixes, and if you use this
+          for user content, please update.
 
 **0.1.4** Temporary workaround for the latest changes in node 0.11, thanks [Daniel](https://github.com/TheHydroImpulse)
 

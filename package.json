@@ -1,6 +1,6 @@
 {
   "name": "gumbo-parser",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "Karl Westin <karl.westin@gmail.com>",
   "description": "Parsing HTML using google gumbo parser",
   "scripts": {
