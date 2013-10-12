@@ -21,6 +21,29 @@ Local<Object> read_attribute(GumboAttribute* attr) {
   return obj;
 }
 
+// thanks @drd https://github.com/drd/gumbo-node/blob/master/gumbo.cc#L162
+Handle<Value> get_tag_namespace(GumboNamespaceEnum tag_namespace) {
+    const char* namespace_name;
+
+    switch (tag_namespace) {
+    case GUMBO_NAMESPACE_HTML:
+	namespace_name = "HTML";
+	break;
+    case GUMBO_NAMESPACE_SVG:
+	namespace_name = "SVG";
+	break;
+    case GUMBO_NAMESPACE_MATHML:
+	namespace_name = "MATHML";
+	break;
+    default:
+	ThrowException(
+            Exception::TypeError(String::New("Unknown tag namespace")));
+	return Undefined();
+    }
+
+    return String::NewSymbol(namespace_name);
+}
+
 Local<Object> read_text(GumboNode* node) {
   Local<Object> obj = Object::New();
   Local<Integer> type = Integer::New(3);
@@ -51,9 +74,39 @@ Local<Object> read_comment(GumboNode* node) {
 Local<Object> read_element(GumboNode* node) {
   Local<Object> obj = Object::New();
   Local<String> tag = String::New(gumbo_normalized_tagname(node->v.element.tag));
+
+  
+  obj->Set(String::NewSymbol("originalTag"),
+          String::New(node->v.element.original_tag.data,
+                      node->v.element.original_tag.length));
+
+  obj->Set(String::NewSymbol("originalEndTag"),
+          String::New(node->v.element.original_end_tag.data,
+                      node->v.element.original_end_tag.length));
+
+  if(tag->Length() == 0) {
+    // if we don't have a tagname (i.e. it's a custom tag), 
+    // extract the tagname from the original text
+    GumboStringPiece clone = node->v.element.original_tag;
+    gumbo_tag_from_original_text(&clone);
+    tag = String::New(clone.data, clone.length);
+  }
+
   obj->Set(String::NewSymbol("nodeType"), Integer::New(1));
   obj->Set(String::NewSymbol("nodeName"), tag);
   obj->Set(String::NewSymbol("tagName"), tag);
+
+  obj->Set(String::NewSymbol("tagNamespace"),
+       get_tag_namespace(node->v.element.tag_namespace));
+
+   obj->Set(String::NewSymbol("originalTag"),
+          String::New(node->v.element.original_tag.data,
+                      node->v.element.original_tag.length));
+
+   obj->Set(String::NewSymbol("originalEndTag"),
+          String::New(node->v.element.original_end_tag.data,
+                      node->v.element.original_end_tag.length));
+
 
   GumboVector* children = &node->v.element.children;
   Local<Array> childNodes = Array::New(children->length);

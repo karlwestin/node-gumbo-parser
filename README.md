@@ -40,8 +40,11 @@ Element:
   nodeName (string) (same as tagname)
   nodeType (number) 1
   tagName (string)  (normalized to lowercase)
+  originalTag (string) original text from tag
+  originalTagEnd (string) original closing tag from original text, if there was one
   children (array) -> replicating childNodes rather than children,
                       ie all text / comment children are included
+  tagNamespace (string) "HTML", "SVG" or "MATHML"
   attributes (array)
 
 TextNode:
@@ -93,6 +96,9 @@ npm test
 ```
 
 ## Changes
+
+**0.1.6** Adding originalTag, originalTagName and tagNamespace
+          if the tag is unknown, parse originalTag and set in as tag
 
 **0.1.5** Updating the gumbo-parser to the latest version. This includes some security fixes, and if you use this
           for user content, please update.

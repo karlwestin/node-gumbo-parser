@@ -7,7 +7,6 @@ reader("/test.html", function(text) {
 
   var output = gumbo(text);
   var root = output.root;
-  console.log(output);
 
   assert(!!output, "should return a value");
 
@@ -56,5 +55,16 @@ reader("/unicode.html", function(text) {
   assert.equal(output.root.attributes[0].value, "Héɭｌｏ, ɰòｒｌᏧ");
 
   console.log("Handles non-ascii characters");
+  console.log("...done!");
+});
+
+reader("/custom-tags.html", function(text) {
+  console.log("Running: custom tags");
+  var root = gumbo(text).root;
+
+  assert.equal(root.childNodes[1].childNodes[1].tagName, "background");
+  assert(/^<background/.test(root.childNodes[1].childNodes[1].originalTag));
+
+  console.log("Handles custom tags");
   console.log("...done!");
 });
