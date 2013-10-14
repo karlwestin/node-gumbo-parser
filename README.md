@@ -97,6 +97,8 @@ npm test
 
 ## Changes
 
+**0.1.7** Fixes for build on snow leopard
+
 **0.1.6** Adding originalTag, originalTagName and tagNamespace
           if the tag is unknown, parse originalTag and set in as tag
 
