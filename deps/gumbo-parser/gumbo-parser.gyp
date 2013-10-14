@@ -35,6 +35,11 @@
        'target_name': 'gumbo',
        'product_prefix': 'lib',
        'type': 'static_library',
+       'xcode_settings': {
+          'OTHER_CFLAGS': [
+            '-Wall', '-Wno-sign-compare', '-std=gnu99'
+          ],
+        },
        'sources': [
             'src/attribute.c',
             'src/attribute.h',
