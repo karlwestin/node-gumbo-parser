@@ -2,6 +2,12 @@
   "name": "gumbo-parser",
   "version": "0.1.7",
   "author": "Karl Westin <karl.westin@gmail.com>",
+  "contributors": [
+    {
+      "name": "Eric O'Connell",
+      "email": "eric.oconnell@idealist.org"
+    }
+  ],
   "description": "Parsing HTML using google gumbo parser",
   "scripts": {
     "test": "node test/test.js"
