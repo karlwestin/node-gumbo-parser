@@ -21,7 +21,10 @@ gumbo(htmlstring, {
   tabStop: 8,
   // Whether or not to stop parsing when the first error is encountered.
   // default: false
-  stopOnFirstError: true
+  stopOnFirstError: true,
+
+  // experimental: fragment parsing
+  fragment: true
 });
 
 returns:
@@ -34,6 +37,13 @@ returns:
   root: {
     // the html element (se 'Element' below)
   }
+}
+
+if you use fragment parsing:
+{
+  childNodes: [
+    list
+  ]
 }
 
 Element:

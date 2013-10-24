@@ -68,3 +68,14 @@ reader("/custom-tags.html", function(text) {
   console.log("Handles custom tags");
   console.log("...done!");
 });
+
+reader("/fragment.html", function(text) {
+  console.log("Running: fragment parsing");
+  var fragment = gumbo(text, { fragment: true });
+
+  assert.equal(fragment.childNodes.length, 4);
+  assert.equal(fragment.childNodes[0].tagName, "form");
+  assert.equal(fragment.childNodes[2].tagName, "br");
+
+  console.log("...done");
+});
