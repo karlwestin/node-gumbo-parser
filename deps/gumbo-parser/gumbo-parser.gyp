@@ -68,9 +68,10 @@
             'src/vector.h',
         ],
        'conditions': [
-           ['OS=="linux"', {
+           ['OS=="win"', {
+           }, { # OS != "win"
              'cflags': ['-std=gnu99']
-           }, {}]
+           }]
        ],
     },
 

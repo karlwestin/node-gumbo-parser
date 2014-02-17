@@ -104,6 +104,8 @@ npm test
 
 ## Changes
 
+**0.1.8** Fix for BSD build problem
+
 **0.1.7** Fixes for build on snow leopard
 
 **0.1.6** Adding originalTag, originalTagName and tagNamespace
