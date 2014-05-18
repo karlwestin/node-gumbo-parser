@@ -18,9 +18,8 @@
 
 #include <stdio.h>
 
-#include "test_utils.h"
-
 #include "gtest/gtest.h"
+#include "test_utils.h"
 
 extern const char* kGumboTagNames[];
 
@@ -54,8 +53,8 @@ class GumboTokenizerTest : public GumboTest {
   GumboToken token_;
 };
 
-TEST(GumboTagEnumTest, HtmlTagIncludesAllTags) {
-  EXPECT_EQ(146, GUMBO_TAG_UNKNOWN);
+TEST(GumboTagEnumTest, TagEnumIncludesAllTags) {
+  EXPECT_EQ(149, GUMBO_TAG_UNKNOWN);
   EXPECT_STREQ("", kGumboTagNames[GUMBO_TAG_UNKNOWN]);
 }
 

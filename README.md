@@ -21,7 +21,10 @@ gumbo(htmlstring, {
   tabStop: 8,
   // Whether or not to stop parsing when the first error is encountered.
   // default: false
-  stopOnFirstError: true
+  stopOnFirstError: true,
+
+  // experimental: fragment parsing
+  fragment: true
 });
 ```
 
@@ -40,6 +43,13 @@ returns:
 ```
 
 ```
+if you use fragment parsing:
+{
+  childNodes: [
+    list
+  ]
+}
+
 Element:
   nodeName (string) (same as tagname)
   nodeType (number) 1
@@ -92,7 +102,8 @@ and the second part will be in `document.systemIdentifier`. You can read more ab
 
 ### Untrusted content
 
-If you plan on using gumbo-parser to clean user input, [please read this comment from the gumbo-parsers authors.](https://github.com/google/gumbo-parser/issues/53#issuecomment-24707222)
+If you plan on using gumbo-parser to clean user input, the gumbo parser is one of the most well-tested and audited parsers available. 
+[Please read this comment from the gumbo-parsers authors.](https://github.com/google/gumbo-parser/issues/53#issuecomment-43395597)
 
 ### Build and test:
 
@@ -103,6 +114,9 @@ npm test
 ```
 
 ## Changes
+**0.1.9** Show off experimental fragment parsing
+          Update gumbo parser to a more secure version
+          Update statement about security
 
 **0.1.8** Fix for BSD build problem
 

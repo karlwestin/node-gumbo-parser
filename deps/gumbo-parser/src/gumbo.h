@@ -42,6 +42,11 @@
 #ifndef GUMBO_GUMBO_H_
 #define GUMBO_GUMBO_H_
 
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#define fileno _fileno
+#endif
+
 #include <stdbool.h>
 #include <stddef.h>
 
@@ -164,11 +169,12 @@ typedef enum {
   // http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#scripting-1
   GUMBO_TAG_SCRIPT,
   GUMBO_TAG_NOSCRIPT,
+  GUMBO_TAG_TEMPLATE,
   // http://www.whatwg.org/specs/web-apps/current-work/multipage/sections.html#sections
   GUMBO_TAG_BODY,
+  GUMBO_TAG_ARTICLE,
   GUMBO_TAG_SECTION,
   GUMBO_TAG_NAV,
-  GUMBO_TAG_ARTICLE,
   GUMBO_TAG_ASIDE,
   GUMBO_TAG_H1,
   GUMBO_TAG_H2,
@@ -193,6 +199,7 @@ typedef enum {
   GUMBO_TAG_DD,
   GUMBO_TAG_FIGURE,
   GUMBO_TAG_FIGCAPTION,
+  GUMBO_TAG_MAIN,
   GUMBO_TAG_DIV,
   // http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#text-level-semantics
   GUMBO_TAG_A,
@@ -204,6 +211,7 @@ typedef enum {
   GUMBO_TAG_Q,
   GUMBO_TAG_DFN,
   GUMBO_TAG_ABBR,
+  GUMBO_TAG_DATA,
   GUMBO_TAG_TIME,
   GUMBO_TAG_CODE,
   GUMBO_TAG_VAR,
@@ -213,6 +221,7 @@ typedef enum {
   GUMBO_TAG_SUP,
   GUMBO_TAG_I,
   GUMBO_TAG_B,
+  GUMBO_TAG_U,
   GUMBO_TAG_MARK,
   GUMBO_TAG_RUBY,
   GUMBO_TAG_RT,
@@ -284,8 +293,8 @@ typedef enum {
   // http://www.whatwg.org/specs/web-apps/current-work/multipage/interactive-elements.html#interactive-elements
   GUMBO_TAG_DETAILS,
   GUMBO_TAG_SUMMARY,
-  GUMBO_TAG_COMMAND,
   GUMBO_TAG_MENU,
+  GUMBO_TAG_MENUITEM,
   // Non-conforming elements that nonetheless appear in the HTML5 spec.
   // http://www.whatwg.org/specs/web-apps/current-work/multipage/obsolete.html#non-conforming-features
   GUMBO_TAG_APPLET,
@@ -313,7 +322,6 @@ typedef enum {
   GUMBO_TAG_NOBR,
   GUMBO_TAG_SPACER,
   GUMBO_TAG_TT,
-  GUMBO_TAG_U,
   // Used for all tags that don't have special handling in HTML.
   GUMBO_TAG_UNKNOWN,
   // A marker value to indicate the end of the enum, for iterating over it.
@@ -363,7 +371,7 @@ GumboTag gumbo_tag_enum(const char* tagname);
 /**
  * Attribute namespaces.
  * HTML includes special handling for XLink, XML, and XMLNS namespaces on
- * attributes.  Everything else goes in the generatic "NONE" namespace.
+ * attributes.  Everything else goes in the generic "NONE" namespace.
  */
 typedef enum {
   GUMBO_ATTR_NAMESPACE_NONE,

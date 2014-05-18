@@ -13,11 +13,28 @@ Local<Object> read_element(GumboNode* node);
 Local<Object> read_attribute(GumboAttribute* attr);
 Local<Object> read_document(GumboNode* node);
 
+void record_location(Local<Object> node, GumboSourcePosition* pos, const char* name) {
+    Local<Object> position = Object::New();
+    position->Set(String::NewSymbol("line"),
+                  Number::New(pos->line));
+    position->Set(String::NewSymbol("column"),
+                  Number::New(pos->column));
+    position->Set(String::NewSymbol("offset"),
+                  Number::New(pos->offset));
+    node->Set(String::NewSymbol(name), position);
+}
+
 Local<Object> read_attribute(GumboAttribute* attr) {
   Local<Object> obj = Object::New();
   obj->Set(String::NewSymbol("nodeType"), Integer::New(2));
   obj->Set(String::NewSymbol("name"), String::New(attr->name));
   obj->Set(String::NewSymbol("value"), String::New(attr->value));
+
+  record_location(obj, &attr->name_start, "nameStart");
+  record_location(obj, &attr->name_end, "nameEnd");
+
+  record_location(obj, &attr->value_start, "valueStart");
+  record_location(obj, &attr->value_end, "valueEnd");
   return obj;
 }
 
@@ -59,6 +76,8 @@ Local<Object> read_text(GumboNode* node) {
   obj->Set(String::NewSymbol("nodeType"), type);
   obj->Set(String::NewSymbol("nodeName"), name);
   obj->Set(String::NewSymbol("textContent"), String::New(node->v.text.text));
+
+  record_location(obj, &node->v.text.start_pos, "startPos");
   return obj;
 }
 
@@ -125,6 +144,14 @@ Local<Object> read_element(GumboNode* node) {
     }
   }
   obj->Set(String::NewSymbol("attributes"), attrs);
+
+  // set location if the element actually comes from the source
+  if (node->v.element.original_tag.length == 0) {
+      obj->Set(String::NewSymbol("startPos"), Undefined());
+  } else {
+    record_location(obj, &node->v.element.start_pos, "startPos");
+    record_location(obj, &node->v.element.end_pos, "endPos");
+  }
 
   return obj;
 }
