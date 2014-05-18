@@ -60,11 +60,14 @@ Element:
                       ie all text / comment children are included
   tagNamespace (string) "HTML", "SVG" or "MATHML"
   attributes (array)
+  startPos (position) -> if element is inserted by parser, this value is undefined
+  endPos (position)
 
 TextNode:
   nodeName (string) #text or #cdata-section
   nodeType (number) 3
   textContent (string)
+  startPos (position)
 
 Document:
   nodeName (string) #document
@@ -85,6 +88,16 @@ Attribute
   name: attribute name
   value: attribute value (currently always string, doh)
   nodeType: (number) 2
+  nameStart: (position)
+  nameEnd: (position)
+  valueStart: (position)
+  valueEnd: (position)
+
+Position
+  line:   number
+  column: number
+  offset: number
+
 ```
 
 ### About html doctypes
@@ -114,7 +127,9 @@ npm test
 ```
 
 ## Changes
-**0.1.9** Show off experimental fragment parsing
+**0.1.9** Experimental fragment parsing
+          Expose node positions from the parser, which also enables the user
+            to see if an element is inserted by the parser or was in the text
           Update gumbo parser to a more secure version
           Update statement about security
 
