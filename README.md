@@ -4,17 +4,17 @@
 
 Using [google's gumbo parser](https://github.com/google/gumbo-parser) to parse HTML in node.
 
-```
+```js
 var gumbo = require("gumbo-parser");
 var tree = gumbo(htmlstring);
 ```
 
 ### Usage
-```
-There's only one method:
-gumbo(htmlstring) 
+There's only one method: `gumbo(htmlstring)`. 
 
 You can also pass in the options
+
+```js
 gumbo(htmlstring, {
   // The tab-stop size, for computing positions in source code that uses tabs.
   // default: 8
@@ -23,9 +23,11 @@ gumbo(htmlstring, {
   // default: false
   stopOnFirstError: true
 });
+```
 
 returns:
 
+```js
 {
   document: {
     // the document element (see below)
@@ -35,7 +37,9 @@ returns:
     // the html element (se 'Element' below)
   }
 }
+```
 
+```
 Element:
   nodeName (string) (same as tagname)
   nodeType (number) 1
@@ -78,8 +82,10 @@ Attribute
 An html document will always have the `document.name` "html".
 If the document has anything else in the type, for example this html4 doctype:
 
+```html
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+```
 
 the first part within quotation marks will end up in the `document.publicIdentifier`,
 and the second part will be in `document.systemIdentifier`. You can read more about this here: [http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-doctype](http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-doctype).
@@ -89,13 +95,16 @@ and the second part will be in `document.systemIdentifier`. You can read more ab
 If you plan on using gumbo-parser to clean user input, [please read this comment from the gumbo-parsers authors.](https://github.com/google/gumbo-parser/issues/53#issuecomment-24707222)
 
 ### Build and test:
-```
+
+```bash
 node-gyp configure
 node-gyp build
 npm test
 ```
 
 ## Changes
+
+**0.1.8** Fix for BSD build problem
 
 **0.1.7** Fixes for build on snow leopard
 
