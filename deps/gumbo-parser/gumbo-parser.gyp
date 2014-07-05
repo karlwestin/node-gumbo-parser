@@ -65,6 +65,11 @@
        'conditions': [
            ['OS=="linux"', {
              'cflags': ['-std=gnu99']
+           }, {}],
+           ['OS=="win"', {
+             'include_dirs': [
+                 'visualc/include',
+             ],
            }, {}]
        ],
     },
