@@ -127,29 +127,31 @@ npm test
 ```
 
 ## Changes
-**0.1.9** Experimental fragment parsing
-          Expose node positions from the parser, which also enables the user
-            to see if an element is inserted by the parser or was in the text
-          Update gumbo parser to a more secure version
-          Update statement about security
+**0.1.10** Visual Studio bugfix
+           Thanks [takenspc](https://github.com/takenspc)
+**0.1.9**  Experimental fragment parsing
+           Expose node positions from the parser, which also enables the user
+             to see if an element is inserted by the parser or was in the text
+           Update gumbo parser to a more secure version
+           Update statement about security
 
-**0.1.8** Fix for BSD build problem
+**0.1.8**  Fix for BSD build problem
 
-**0.1.7** Fixes for build on snow leopard
+**0.1.7**  Fixes for build on snow leopard
 
-**0.1.6** Adding originalTag, originalTagName and tagNamespace
-          if the tag is unknown, parse originalTag and set in as tag
+**0.1.6**  Adding originalTag, originalTagName and tagNamespace
+           if the tag is unknown, parse originalTag and set in as tag
 
-**0.1.5** Updating the gumbo-parser to the latest version. This includes some security fixes, and if you use this
-          for user content, please update.
+**0.1.5**  Updating the gumbo-parser to the latest version. This includes some security fixes, and if you use this
+           for user content, please update.
 
-**0.1.4** Temporary workaround for the latest changes in node 0.11, thanks [Daniel](https://github.com/TheHydroImpulse)
+**0.1.4**  Temporary workaround for the latest changes in node 0.11, thanks [Daniel](https://github.com/TheHydroImpulse)
 
-**0.1.3** Fixes utf-8 bug, thanks [Yonatan](https://github.com/yonatan)
+**0.1.3**  Fixes utf-8 bug, thanks [Yonatan](https://github.com/yonatan)
 
-**0.1.2** Taking the (optional) options argument
-          providing publicIdentifier and systemIdentifer for the doctype
+**0.1.2**  Taking the (optional) options argument
+           providing publicIdentifier and systemIdentifer for the doctype
 
-**0.1.1** Fix build on node 0.8
+**0.1.1**  Fix build on node 0.8
 
-**0.1.0** Passing { document: document, root: root } instead of only root
+**0.1.0**  Passing { document: document, root: root } instead of only root
