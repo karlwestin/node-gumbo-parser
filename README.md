@@ -129,9 +129,11 @@ npm test
 ## Changes
 **0.1.11** Upgrade C lib
            Uses version 0.9.2, performance improvements, duplicate attributes, semicolon fix,
-           [See all changes here](https://github.com/google/gumbo-parser/blob/master/CHANGES.md)
+           [See all changes here](https://github.com/google/gumbo-parser/blob/master/CHANGES.md)  
+
 **0.1.10** Visual Studio bugfix
            Thanks [takenspc](https://github.com/takenspc)
+
 **0.1.9**  Experimental fragment parsing
            Expose node positions from the parser, which also enables the user
              to see if an element is inserted by the parser or was in the text
