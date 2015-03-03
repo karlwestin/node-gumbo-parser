@@ -1,7 +1,5 @@
 #include <stdlib.h>
 #include <cstring>
-//#include <v8.h>
-//#include <node.h>
 #include <nan.h>
 #include "deps/gumbo-parser/src/gumbo.h"
 
@@ -15,14 +13,14 @@ Local<Object> read_attribute(GumboAttribute* attr);
 Local<Object> read_document(GumboNode* node);
 
 void record_location(Local<Object> node, GumboSourcePosition* pos, const char* name) {
-    Local<Object> position = NanNew<Object>();
-    position->Set(NanNew<String>("line"),
-                  NanNew<Number>(pos->line));
-    position->Set(NanNew<String>("column"),
-                  NanNew<Number>(pos->column));
-    position->Set(NanNew<String>("offset"),
-                  NanNew<Number>(pos->offset));
-    node->Set(NanNew<String>(name), position);
+  Local<Object> position = NanNew<Object>();
+  position->Set(NanNew<String>("line"),
+                NanNew<Number>(pos->line));
+  position->Set(NanNew<String>("column"),
+                NanNew<Number>(pos->column));
+  position->Set(NanNew<String>("offset"),
+                NanNew<Number>(pos->offset));
+  node->Set(NanNew<String>(name), position);
 }
 
 Local<Object> read_attribute(GumboAttribute* attr) {
@@ -41,23 +39,23 @@ Local<Object> read_attribute(GumboAttribute* attr) {
 
 // thanks @drd https://github.com/drd/gumbo-node/blob/master/gumbo.cc#L162
 Handle<Value> get_tag_namespace(GumboNamespaceEnum tag_namespace) {
-    const char* namespace_name;
+  const char* namespace_name;
 
-    switch (tag_namespace) {
+  switch (tag_namespace) {
     case GUMBO_NAMESPACE_HTML:
-	namespace_name = "HTML";
-	break;
+        namespace_name = "HTML";
+        break;
     case GUMBO_NAMESPACE_SVG:
-	namespace_name = "SVG";
-	break;
+        namespace_name = "SVG";
+        break;
     case GUMBO_NAMESPACE_MATHML:
-	namespace_name = "MATHML";
-	break;
+        namespace_name = "MATHML";
+        break;
     default:
-	NanThrowTypeError("Unknown tag namespace");
-    }
-	
-	return NanNew<String>(namespace_name);
+        NanThrowTypeError("Unknown tag namespace");
+  }
+  
+  return NanNew<String>(namespace_name);
 }
 
 Local<Object> read_text(GumboNode* node) {
@@ -95,12 +93,12 @@ Local<Object> read_element(GumboNode* node) {
 
   
   obj->Set(NanNew<String>("originalTag"),
-          NanNew(node->v.element.original_tag.data,
-                      node->v.element.original_tag.length));
+           NanNew(node->v.element.original_tag.data,
+                  node->v.element.original_tag.length));
 
   obj->Set(NanNew<String>("originalEndTag"),
-          NanNew(node->v.element.original_end_tag.data,
-                      node->v.element.original_end_tag.length));
+           NanNew(node->v.element.original_end_tag.data,
+                  node->v.element.original_end_tag.length));
 
   if(tag->Length() == 0) {
     // if we don't have a tagname (i.e. it's a custom tag), 
@@ -118,12 +116,12 @@ Local<Object> read_element(GumboNode* node) {
        get_tag_namespace(node->v.element.tag_namespace));
 
    obj->Set(NanNew<String>("originalTag"),
-          NanNew(node->v.element.original_tag.data,
-                      node->v.element.original_tag.length));
+            NanNew(node->v.element.original_tag.data,
+                   node->v.element.original_tag.length));
 
    obj->Set(NanNew<String>("originalEndTag"),
-          NanNew(node->v.element.original_end_tag.data,
-                      node->v.element.original_end_tag.length));
+            NanNew(node->v.element.original_end_tag.data,
+                   node->v.element.original_end_tag.length));
 
 
   GumboVector* children = &node->v.element.children;
@@ -199,8 +197,7 @@ Local<Object> recursive_search(GumboNode* node) {
 }
 
 NAN_METHOD(Method) {
-//Handle<Value> Method(const Arguments& args) {
-	NanScope();
+    NanScope();
     /*
      * getting options
      */
@@ -222,7 +219,7 @@ NAN_METHOD(Method) {
      */
     Local<Value> str = args[0];
     if(!str->IsString() ) {
-	  return NanThrowError("The first argument needs to be a string");
+      return NanThrowError("The first argument needs to be a string");
     }
 
     v8::String::Utf8Value string(str);
@@ -245,12 +242,12 @@ NAN_METHOD(Method) {
     // TODO: Parse errors
 
     gumbo_destroy_output(&options, output);
-	NanReturnValue(ret);
+    NanReturnValue(ret);
 } 
 
 void init(Handle<Object> exports) {
     exports->Set(NanNew<String>("gumbo"),
-	  NanNew<FunctionTemplate>(Method)->GetFunction());
+      NanNew<FunctionTemplate>(Method)->GetFunction());
 }
 
 NODE_MODULE(binding, init);
