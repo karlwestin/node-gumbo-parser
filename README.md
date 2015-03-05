@@ -127,6 +127,10 @@ npm test
 ```
 
 ## Changes
+**0.1.12** io.js support!
+           Thanks a lot to [MicroMike](https://github.com/mike820324)
+            (unfortunately, this seems to have ended 0.8 support)
+
 **0.1.11** Upgrade C lib
            Uses version 0.9.2, performance improvements, duplicate attributes, semicolon fix,
            [See all changes here](https://github.com/google/gumbo-parser/blob/master/CHANGES.md)  
