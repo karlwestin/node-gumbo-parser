@@ -10,7 +10,7 @@ var tree = gumbo(htmlstring);
 ```
 
 ### Usage
-There's only one method: `gumbo(htmlstring)`. 
+There's only one method: `gumbo(htmlstring)`.
 
 You can also pass in the options
 
@@ -69,6 +69,10 @@ TextNode:
   textContent (string)
   startPos (position)
 
+  note: In DOM3, CDATA is marked as nodeType 4. However, after checking that neither
+  firefox, chrome nor safari marks CDATA as 4 (they use 3 or 8), and that CDATA is
+  gone in DOM4, i decided to stick with the futuristic alternative.
+
 Document:
   nodeName (string) #document
   nodeType (number) 9
@@ -115,7 +119,7 @@ and the second part will be in `document.systemIdentifier`. You can read more ab
 
 ### Untrusted content
 
-If you plan on using gumbo-parser to clean user input, the gumbo parser is one of the most well-tested and audited parsers available. 
+If you plan on using gumbo-parser to clean user input, the gumbo parser is one of the most well-tested and audited parsers available.
 [Please read this comment from the gumbo-parsers authors.](https://github.com/google/gumbo-parser/issues/53#issuecomment-43395597)
 
 ### Build and test:
@@ -127,13 +131,17 @@ npm test
 ```
 
 ## Changes
+**0.1.13** Upgrade C lib
+           Uses version 0.9.3, CDATA handling (see note in docs)
+           [See all changes here](https://github.com/google/gumbo-parser/blob/master/CHANGES.md)
+
 **0.1.12** io.js support!
            Thanks a lot to [MicroMike](https://github.com/mike820324)
             (unfortunately, this seems to have ended 0.8 support)
 
 **0.1.11** Upgrade C lib
            Uses version 0.9.2, performance improvements, duplicate attributes, semicolon fix,
-           [See all changes here](https://github.com/google/gumbo-parser/blob/master/CHANGES.md)  
+           [See all changes here](https://github.com/google/gumbo-parser/blob/master/CHANGES.md)
 
 **0.1.10** Visual Studio bugfix
            Thanks [takenspc](https://github.com/takenspc)

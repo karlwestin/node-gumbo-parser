@@ -54,7 +54,7 @@ Handle<Value> get_tag_namespace(GumboNamespaceEnum tag_namespace) {
     default:
         NanThrowTypeError("Unknown tag namespace");
   }
-  
+
   return NanNew<String>(namespace_name);
 }
 
@@ -69,6 +69,7 @@ Local<Object> read_text(GumboNode* node) {
         break;
     case GUMBO_NODE_CDATA:
         name = NanNew("#cdata-section");
+        break;
   }
   obj->Set(NanNew<String>("nodeType"), type);
   obj->Set(NanNew<String>("nodeName"), name);
@@ -91,7 +92,7 @@ Local<Object> read_element(GumboNode* node) {
   Local<Object> obj = NanNew<Object>();
   Local<String> tag = NanNew(gumbo_normalized_tagname(node->v.element.tag));
 
-  
+
   obj->Set(NanNew<String>("originalTag"),
            NanNew(node->v.element.original_tag.data,
                   node->v.element.original_tag.length));
@@ -101,7 +102,7 @@ Local<Object> read_element(GumboNode* node) {
                   node->v.element.original_end_tag.length));
 
   if(tag->Length() == 0) {
-    // if we don't have a tagname (i.e. it's a custom tag), 
+    // if we don't have a tagname (i.e. it's a custom tag),
     // extract the tagname from the original text
     GumboStringPiece clone = node->v.element.original_tag;
     gumbo_tag_from_original_text(&clone);
@@ -149,7 +150,7 @@ Local<Object> read_element(GumboNode* node) {
     record_location(obj, &node->v.element.start_pos, "startPos");
     record_location(obj, &node->v.element.end_pos, "endPos");
   }
-  
+
   return obj;
 }
 
@@ -215,7 +216,7 @@ NAN_METHOD(Method) {
     }
 
     /*
-     * getting text 
+     * getting text
      */
     Local<Value> str = args[0];
     if(!str->IsString() ) {
@@ -243,7 +244,7 @@ NAN_METHOD(Method) {
 
     gumbo_destroy_output(&options, output);
     NanReturnValue(ret);
-} 
+}
 
 void init(Handle<Object> exports) {
     exports->Set(NanNew<String>("gumbo"),

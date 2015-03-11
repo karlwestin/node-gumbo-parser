@@ -79,3 +79,20 @@ reader("/fragment.html", function(text) {
 
   console.log("...done");
 });
+
+reader("/cdata.html", function(text) {
+  console.log("Running: CDATA parsing");
+  var output = gumbo(text);
+
+  var invalidCDATA = output.root.childNodes[2].childNodes[1].childNodes[0];
+  assert.equal(invalidCDATA.nodeType, 8);
+  assert.equal(invalidCDATA.nodeName, "#comment");
+  console.log("handles in-html cdata as comments");
+
+  var validCDATA = output.root.childNodes[2].childNodes[3].childNodes[1].childNodes[0];
+  assert.equal(validCDATA.nodeType, 3);
+  assert.equal(validCDATA.nodeName, "#cdata-section");
+  console.log("handles in-mathml cdata as mathml");
+
+  console.log("...done");
+});

@@ -33,6 +33,7 @@
   'targets': [
      {
        'target_name': 'gumbo',
+       'cflags': ['-std=c99', '-Wall'],
        'product_prefix': 'lib',
        'type': 'static_library',
        'sources': [
@@ -65,6 +66,11 @@
        'conditions': [
            ['OS=="linux"', {
              'cflags': ['-std=gnu99']
+           }, {}],
+           ['OS=="win"', {
+             'include_dirs': [
+                 'visualc/include',
+             ]
            }, {}]
        ],
     },

@@ -1,1 +1,83 @@
+node_modules/
 build/
+
+# Compilation artifacts
+*.o
+*.lo
+*.la
+
+# Editor swap files
+*.swp
+*.swo
+*.swn
+
+#emacs editor leftovers
+*.*~
+
+#diff leftovers
+*.orig
+
+# gtest pieces
+gtest
+gtest-1.7.0
+
+# Other build artifacts
+deps/gumbo-parser/Debug
+deps/gumbo-parser/visualc/Debug
+deps/gumbo-parser/visualc/Release
+deps/gumbo-parser/visualc/gumbo.sdf
+deps/gumbo-parser/visualc/gumbo.opensdf
+deps/gumbo-parser/build
+deps/gumbo-parser/.log
+deps/gumbo-parser/.sdf
+deps/gumbo-parser/.opensdf
+deps/gumbo-parser/.deps
+deps/gumbo-parser/.dirstamp
+deps/gumbo-parser/.libs
+deps/gumbo-parser/Makefile
+deps/gumbo-parser/Makefile.in
+deps/gumbo-parser/aclocal.m4
+deps/gumbo-parser/autom4te.cache
+deps/gumbo-parser/compile
+deps/gumbo-parser/config.guess
+deps/gumbo-parser/config.log
+deps/gumbo-parser/config.status
+deps/gumbo-parser/config.sub
+deps/gumbo-parser/configure
+deps/gumbo-parser/core
+deps/gumbo-parser/depcomp
+deps/gumbo-parser/gtest/
+deps/gumbo-parser/gumbo.pc
+deps/gumbo-parser/gumbo_test
+deps/gumbo-parser/gumbo_test.log
+deps/gumbo-parser/gumbo_test.trs
+deps/gumbo-parser/install-sh
+deps/gumbo-parser/libtool
+deps/gumbo-parser/ltmain.sh
+deps/gumbo-parser/m4/
+deps/gumbo-parser/missing
+deps/gumbo-parser/test-driver
+deps/gumbo-parser/test-suite.log
+
+# gyp android artifacts
+gumbo_parser.target.mk
+
+# `make dist` artifacts
+/gumbo-[0-9].[0-9].tar.gz
+/gumbo-[0-9].[0-9]/
+
+# Python dist artifacts
+*.pyc
+deps/gumbo-parser/dist
+deps/gumbo-parser/build
+deps/gumbo-parser/python/gumbo.egg-info
+deps/gumbo-parser/python/gumbo/libgumbo.so
+
+# Example binaries
+benchmark
+clean_text
+find_links
+get_title
+positions_of_class
+prettyprint
+serialize
