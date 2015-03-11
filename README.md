@@ -122,6 +122,10 @@ and the second part will be in `document.systemIdentifier`. You can read more ab
 If you plan on using gumbo-parser to clean user input, the gumbo parser is one of the most well-tested and audited parsers available.
 [Please read this comment from the gumbo-parsers authors.](https://github.com/google/gumbo-parser/issues/53#issuecomment-43395597)
 
+### Node 0.8
+
+Contrary to what i previously said, node-gumbo-parser does build under node 0.8. You might have to `npm update -g npm` though.
+
 ### Build and test:
 
 ```bash
@@ -137,7 +141,6 @@ npm test
 
 **0.1.12** io.js support!
            Thanks a lot to [MicroMike](https://github.com/mike820324)
-            (unfortunately, this seems to have ended 0.8 support)
 
 **0.1.11** Upgrade C lib
            Uses version 0.9.2, performance improvements, duplicate attributes, semicolon fix,
