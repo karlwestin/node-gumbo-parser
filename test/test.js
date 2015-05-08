@@ -40,7 +40,7 @@ reader("/parse-error.html", function(text) {
 
 reader("/legacy-doctype.html", function(text) {
   console.log("Running: legacy doctypes");
-  var output = gumbo(text).document; 
+  var output = gumbo(text).document;
 
   assert(output.systemIdentifier, "system parameter is parsed");
   assert(output.publicIdentifier, "public parameter is parsed");
@@ -76,6 +76,25 @@ reader("/fragment.html", function(text) {
   assert.equal(fragment.childNodes.length, 4);
   assert.equal(fragment.childNodes[0].tagName, "form");
   assert.equal(fragment.childNodes[2].tagName, "br");
+
+  console.log("handles fragment");
+
+  var fragment2 = gumbo("<h1>Hi</h1><br>", { fragmentContext: "div" });
+
+  assert.equal(fragment2.childNodes.length, 2);
+  assert.equal(fragment2.childNodes[0].tagName, "h1");
+  assert.equal(fragment2.childNodes[1].tagName, "br");
+
+  console.log("handles fragment context");
+
+  var fragment3 = gumbo("<title>Hi</title><desc>Greeting</desc>", { fragmentContext: "g", fragmentNamespace: "svg" });
+
+  assert.equal(fragment3.childNodes.length, 2);
+  assert.equal(fragment3.childNodes[0].tagNamespace, "SVG");
+  assert.equal(fragment3.childNodes[0].tagName, "title");
+  assert.equal(fragment3.childNodes[1].tagName, "desc");
+
+  console.log("handles fragment namespace");
 
   console.log("...done");
 });

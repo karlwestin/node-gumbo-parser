@@ -23,8 +23,16 @@ gumbo(htmlstring, {
   // default: false
   stopOnFirstError: true,
 
-  // experimental: fragment parsing
+  // fragment parsing
+  // Option 1: just plain HTML in a 'body' context
   fragment: true
+
+  // Option 2:
+  // gumbo-style fragment parsing:
+  // can be a valid tag for the ns
+  fragmentContext: "div",
+  // optional can be 'html', 'svg', 'mathml', defaults to html
+  fragmentNamespace: "html"
 });
 ```
 
@@ -135,6 +143,13 @@ npm test
 ```
 
 ## Changes
+**0.2.1**  Celebrating some new stuff with a MINOR version change
+            * Fragment parsing supports fragmentContext and fragmentNamespace
+           Uses version 0.10.1, Big changes from the gumbo-parser-team:
+            * Fragment parsing (instead my homebrew fragment parsing, the gumbo c-lib now supports fragments)
+            * Parses all [https://github.com/html5lib/html5lib-tests](html5lib tests) including **template**
+            * 30-40% speed improvement
+
 **0.1.13** Upgrade C lib
            Uses version 0.9.3, CDATA handling (see note in docs)
            [See all changes here](https://github.com/google/gumbo-parser/blob/master/CHANGES.md)

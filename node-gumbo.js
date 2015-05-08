@@ -1,27 +1,33 @@
+var extend = require("util")._extend;
 var bind = require("./build/Release/binding");
 
-/*
- * very simplified fragment parser
- * basically looks for a string position,
- * and return the values that actually comes from the document
- */
-function getFragment(nodes) {
-  return nodes.reduce(function(sum, node) {
-    // startPos is an object if it exists
-    if(node.startPos) {
-      sum.push(node);
-    } else {
-      return getFragment(node.childNodes);
-    }
-
-    return sum;
-
-  }, []);
-}
-
 module.exports = function Gumbo(text, config) {
-  config = config || {};
+  config = extend(config || {});
+
+  // Work for old API;
+  if(config.fragment === true) {
+    config.fragmentContext = "body";
+    config.fragmentNamespace = "html";
+    delete config.fragment;
+  }
+
+  if(config.fragmentContext && !config.fragmentNamespace) {
+    config.fragmentNamespace = "html";
+  } else if (config.fragmentNamespace) {
+    config.fragmentNamespace = config.fragmentNamespace.toLowerCase();
+  }
+
+  // Sanity check on namespace
+  if("fragmentNamespace" in config &&
+    ["svg", "html", "mathml"].indexOf(config.fragmentNamespace) === -1) {
+    throw new Error("Invalid namespace: Valid namespaces are 'svg', 'html', 'mathml'");
+  }
+
   var parsedDocument = bind.gumbo.call(this, text, config);
+
+  if(config.fragmentContext) {
+    return parsedDocument.root;
+  }
 
   // extract the root tag from document resp
   try {
@@ -30,11 +36,5 @@ module.exports = function Gumbo(text, config) {
     // TODO: Say smth smart here
   }
 
-  if(!config.fragment) {
-    return parsedDocument;
-  }
-
-  return {
-    childNodes: getFragment(parsedDocument.document.childNodes)
-  };
+  return parsedDocument;
 };
