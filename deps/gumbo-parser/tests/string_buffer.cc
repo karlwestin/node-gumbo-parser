@@ -26,21 +26,15 @@
 namespace {
 
 #define INIT_GUMBO_STRING(varname, literal) \
-    GumboStringPiece varname = { literal, sizeof(literal) - 1 }
+  GumboStringPiece varname = {literal, sizeof(literal) - 1}
 
 class GumboStringBufferTest : public GumboTest {
  protected:
-  GumboStringBufferTest() {
-    gumbo_string_buffer_init(&parser_, &buffer_);
-  }
+  GumboStringBufferTest() { gumbo_string_buffer_init(&parser_, &buffer_); }
 
-  ~GumboStringBufferTest() {
-    gumbo_string_buffer_destroy(&parser_, &buffer_);
-  }
+  ~GumboStringBufferTest() { gumbo_string_buffer_destroy(&parser_, &buffer_); }
 
-  void NullTerminateBuffer() {
-    buffer_.data[buffer_.length++] = 0;
-  }
+  void NullTerminateBuffer() { buffer_.data[buffer_.length++] = 0; }
 
   GumboStringBuffer buffer_;
 };
@@ -95,6 +89,7 @@ TEST_F(GumboStringBufferTest, AppendCodepoint_4Bytes) {
 }
 
 TEST_F(GumboStringBufferTest, ToString) {
+  gumbo_string_buffer_reserve(&parser_, 8, &buffer_);
   strcpy(buffer_.data, "012345");
   buffer_.length = 7;
 

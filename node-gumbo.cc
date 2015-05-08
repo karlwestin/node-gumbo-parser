@@ -225,6 +225,7 @@ NAN_METHOD(Method) {
 
     v8::String::Utf8Value string(str);
 
+    bool fragment = false;
     /*
      * creating options
      */
@@ -232,13 +233,43 @@ NAN_METHOD(Method) {
     options.tab_stop = tab_stop;
     options.stop_on_first_error = stop_on_first_error;
 
+    /*
+     * find out context for fragment parsing
+     */
+    Local<Value> fragment_context = config->Get(NanNew("fragmentContext"));
+    Local<Value> fragment_namespace = config->Get(NanNew("fragmentNamespace"));
+
+    if(fragment_context->IsString()) {
+      GumboTag context = gumbo_tag_enum(*NanUtf8String(fragment_context->ToString()));
+      GumboNamespaceEnum ns = GUMBO_NAMESPACE_HTML;
+      if(fragment_namespace->IsString()) {
+        char *nsString = *NanUtf8String(fragment_namespace->ToString());
+        if(strcmp(nsString, "svg") == 0) {
+          ns = GUMBO_NAMESPACE_SVG;
+        } else if (strcmp(nsString, "mathml") == 0) {
+          ns = GUMBO_NAMESPACE_MATHML;
+        } else {
+          ns = GUMBO_NAMESPACE_HTML;
+        }
+      }
+
+      options.fragment_context = context;
+      options.fragment_namespace = ns;
+      fragment = true;
+    }
+
     GumboOutput* output = gumbo_parse_with_options(&options, *string, string.length());
 
     // root points to html tag
     // document points to document
     Local<Object> ret = NanNew<Object>();
-    Local<Object> doc = recursive_search(output->document);
-    ret->Set(NanNew<String>("document"), doc);
+    if(!fragment) {
+      Local<Object> doc = recursive_search(output->document);
+      ret->Set(NanNew<String>("document"), doc);
+    } else {
+      Local<Object> root = recursive_search(output->root);
+      ret->Set(NanNew<String>("root"), root);
+    }
 
     // TODO: Parse errors
 

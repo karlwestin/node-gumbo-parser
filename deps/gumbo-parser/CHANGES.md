@@ -1,3 +1,23 @@
+Gumbo 0.10.1 (2015-04-30)
+
+Same as 0.10.0, but with the version number bumped because the last version-number commit to v0.9.4 makes GitHub think that v0.9.4 is the latest version and so it's not highlighted on the webpage.
+
+Gumbo 0.10.0 (2015-04-30)
+
+* Full support for <template> tag (kevinhendricks, nostrademons).
+* Some fixes for <rtc>/<rt> handling (kevinhendricks, vmg).
+* All html5lib-trunk tests pass now! (kevinhendricks, vmg, nostrademons)
+* Support for fragment parsing (vmg)
+* A couple additional example programs (kevinhendricks)
+* Performance improvements totaling an estimated 30-40% total improvement (vmg, nostrademons).
+
+Gumbo 0.9.4 (2015-04-30)
+
+* Additional Visual Studio fixes (lowjoel, nostrademons)
+* Fixed some unused variable warnings.
+* Fix for glibtoolize vs. libtoolize build errors on Mac.
+* Fixed CDATA end tag handling.
+
 Gumbo 0.9.3 (2015-02-17)
 
 * Bugfix for &AElig; entities (rgrove)

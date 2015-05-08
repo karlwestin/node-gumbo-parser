@@ -37,6 +37,10 @@ clean-local:
 
 endif !HAVE_SHARED_LIBGTEST
 
+gentags: src/tag.in
+	@python gentags.py $<
+	@gperf -LANSI-C --ignore-case -m200 $< |python genperf.py >src/tag_gperf.h
+
 lib_LTLIBRARIES = libgumbo.la
 libgumbo_la_CFLAGS = -Wall
 libgumbo_la_LDFLAGS = -version-info 1:0:0 -no-undefined
@@ -55,6 +59,10 @@ libgumbo_la_SOURCES = \
 				src/string_piece.c \
 				src/string_piece.h \
 				src/tag.c \
+				src/tag_enum.h \
+				src/tag_gperf.h \
+				src/tag_strings.h \
+				src/tag_sizes.h \
 				src/token_type.h \
 				src/tokenizer.c \
 				src/tokenizer.h \
@@ -65,7 +73,7 @@ libgumbo_la_SOURCES = \
 				src/util.h \
 				src/vector.c \
 				src/vector.h
-include_HEADERS = src/gumbo.h
+include_HEADERS = src/gumbo.h src/tag_enum.h
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gumbo.pc
