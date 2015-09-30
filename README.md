@@ -1,6 +1,6 @@
 # Gumbo Parser
 
-(npm install not fixed on windows yet)
+[![Build Status](https://travis-ci.org/karlwestin/node-gumbo-parser.svg)](https://travis-ci.org/karlwestin/node-gumbo-parser)
 
 Using [google's gumbo parser](https://github.com/google/gumbo-parser) to parse HTML in node.
 
