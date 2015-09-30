@@ -1,6 +1,6 @@
 # Gumbo Parser
 
-(npm install not fixed on windows yet)
+[![Build Status](https://travis-ci.org/karlwestin/node-gumbo-parser.svg)](https://travis-ci.org/karlwestin/node-gumbo-parser)
 
 Using [google's gumbo parser](https://github.com/google/gumbo-parser) to parse HTML in node.
 
@@ -142,6 +142,8 @@ npm test
 ```
 
 ## Changes
+**0.2.2**  Update to use the latest NaN api, so it works for node 4.0
+
 **0.2.1**  Celebrating some new stuff with a MINOR version change
             * Fragment parsing supports fragmentContext and fragmentNamespace
            Uses version 0.10.1, Big changes from the gumbo-parser-team:
