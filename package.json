@@ -22,13 +22,13 @@
     "parser"
   ],
   "devDependencies": {
-    "node-gyp": "0.10.x"
+    "node-gyp": "3.0.x"
   },
   "license": "MIT",
   "engines": {
     "node": ">=0.10"
   },
   "dependencies": {
-    "nan": "^1.7.0"
+    "nan": "^2.0.x"
   }
 }
