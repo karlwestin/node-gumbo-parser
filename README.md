@@ -124,10 +124,10 @@ If the document has anything else in the type, for example this html4 doctype:
 the first part within quotation marks will end up in the `document.publicIdentifier`,
 and the second part will be in `document.systemIdentifier`. You can read more about this here: [http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-doctype](http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#syntax-doctype).
 
-### Untrusted content
+### Untrusted content / XSS cleaning
 
 If you plan on using gumbo-parser to clean user input, the gumbo parser is one of the most well-tested and audited parsers available.
-[Please read this comment from the gumbo-parsers authors.](https://github.com/google/gumbo-parser/issues/53#issuecomment-43395597)
+[Please read this comment from the gumbo-parsers authors.](https://github.com/google/gumbo-parser/issues/53#issuecomment-43395597). There's a node module for XSS cleaning with the gumbo parser. Check [Gumbo-Sanitize](https://www.npmjs.com/package/gumbo-sanitize) out!
 
 ### Node 0.8
 
@@ -148,7 +148,7 @@ npm test
             * Fragment parsing supports fragmentContext and fragmentNamespace
            Uses version 0.10.1, Big changes from the gumbo-parser-team:
             * Fragment parsing (instead my homebrew fragment parsing, the gumbo c-lib now supports fragments)
-            * Parses all [https://github.com/html5lib/html5lib-tests](html5lib tests) including **template**
+            * Parses all [html5lib tests](https://github.com/html5lib/html5lib-tests) including **template**
             * 30-40% speed improvement
            [See all changes here](https://github.com/google/gumbo-parser/blob/master/CHANGES.md)
 
