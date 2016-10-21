@@ -79,6 +79,10 @@ Local<Object> read_text(GumboNode* node) {
   Nan::Set(obj, Nan::New("nodeType").ToLocalChecked(), type);
   Nan::Set(obj, Nan::New("nodeName").ToLocalChecked(), Nan::New(name).ToLocalChecked());
   Nan::Set(obj, Nan::New("textContent").ToLocalChecked(), Nan::New(node->v.text.text).ToLocalChecked());
+  Nan::Set(obj,
+           Nan::New("originalText").ToLocalChecked(),
+           Nan::New(node->v.text.original_text.data,
+                  node->v.text.original_text.length).ToLocalChecked());
 
   record_location(obj, &node->v.text.start_pos, "startPos");
   return obj;
