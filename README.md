@@ -74,6 +74,7 @@ TextNode:
   nodeName (string) #text or #cdata-section
   nodeType (number) 3
   textContent (string)
+  originalText (string)
   startPos (position)
 
   note: In DOM3, CDATA is marked as nodeType 4. However, after checking that neither
