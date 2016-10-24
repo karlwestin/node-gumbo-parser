@@ -7,8 +7,16 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-
+cache:
+  directories:
+    - node_modules
+after_success:
+  - npm run semantic-release
 node_js:
-  - "4.1"
-  - "0.12"
+  - "6"
+  - "4"
   - "0.10"
+branches:
+  except:
+    # ignore git tags created by semantic-release, like "v1.2.3"
+    - /^v\d+\.\d+\.\d+$/
