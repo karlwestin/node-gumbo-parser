@@ -20,7 +20,9 @@ reader("/test.html", function(text) {
   assert.equal(root.childNodes[4].attributes[0].name, "bgcolor", "should parse attrs");
   assert.equal(root.childNodes[4].attributes[0].value, "#ff0fff", "should parse attrs");
   console.log("Parses attributes");
-
+  assert.equal(root.childNodes[4].childNodes[0].textContent.trim(), "<text content>");
+  assert.equal(root.childNodes[4].childNodes[0].originalText.trim(), "&lt;text content&gt;");
+  console.log("Parsers text");
   console.log("...done!");
 });
 
