@@ -1,6 +1,6 @@
 {
   "name": "gumbo-parser",
-  "version": "0.2.2",
+  "version": "0.0.0-semantically-released",
   "author": "Karl Westin <karl.westin@gmail.com>",
   "contributors": [
     {
@@ -10,6 +10,7 @@
   ],
   "description": "Parsing HTML using google gumbo parser",
   "scripts": {
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "node test/test.js"
   },
   "repository": {
@@ -22,6 +23,7 @@
     "parser"
   ],
   "devDependencies": {
+    "semantic-release": "^4.3.5",
     "node-gyp": "3.0.x"
   },
   "license": "MIT",
